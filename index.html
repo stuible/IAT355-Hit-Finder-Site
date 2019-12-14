@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #191414;
+            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+            padding: 50px;
+
+        }
+
+        #hit-finder {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-template-areas: "titles genres""map trend";
+
+            text-align: center;
+        }
+
+        #titles {
+            grid-area: titles;
+            text-align: left;
+        }
+
+        #genres {
+            grid-area: genres;
+        }
+
+        #map {
+            grid-area: map;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        #trend {
+            grid-area: trend;
+        }
+
+        h1 {
+            color: #1DB954;
+        }
+
+        #garbage {
+            display: none;
+        }
+
+        #titles>div {
+            background: unset !important;
+        }
+    </style>
+    <script>
+
+    </script>
+</head>
+
+<body>
+    <script type="module">
+
+        // Load the Observable runtime and inspector.
+        import { Runtime, Inspector } from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+
+        // Your notebook, compiled as an ES module.
+        import notebook from "https://api.observablehq.com/@stuible/hit-finder.js?v=3";
+
+        // Load the notebook, observing its cells with a default Inspector
+        // that simply renders the value of each cell into the provided DOM node.
+        // new Runtime().module(notebook, Inspector.into(document.body));
+
+        const main = new Runtime().module(notebook, name => {
+            console.log(name)
+            if (name === "viewof topGenresChart") {
+                return new Inspector(document.querySelector("#top-genres"));
+            }
+            if (name === "viewof map") {
+                return new Inspector(document.querySelector("#map"));
+            }
+            if (name === "viewof chart") {
+                return new Inspector(document.querySelector("#trend"));
+            }
+            if (name === "viewof titles") {
+                return new Inspector(document.querySelector("#titles"));
+            }
+            if (name === "viewof range") {
+                return new Inspector(document.querySelector("#range"));
+            }
+            else return new Inspector(document.querySelector("#garbage"));
+        });
+
+        let CSSVariables = main._scope.get("CSSVariables")._definition()
+
+        CSSVariables.textColor = 'white'
+        CSSVariables.backgroundColor = '#191414'
+
+        const v = main.redefine("CSSVariables", [], CSSVariables)
+
+    </script>
+    <h1>HIT FINDER</h1>
+    <main id="hit-finder">
+        <div id="titles"></div>
+        <div id="top-genres"></div>
+        <div id="range"></div>
+        <div id="map"></div>
+        <div id="trend"></div>
+    </main>
+
+
+
+    <div id="garbage"></div>
+</body>
+
+</html>
