@@ -68,8 +68,16 @@
         .country-title.hide {
             opacity: 0.25;
         }
+
         .origins-title.hide {
             opacity: 0.25;
+        }
+
+        @media only screen and (max-width: 1200px) {
+            #hit-finder {
+                grid-template-columns: 1fr;
+                grid-template-areas: "titles" "genres" "map" "trend";
+            }
         }
     </style>
     <script>
@@ -110,7 +118,7 @@
             if (name === "viewof genreTrendTypeDropdown") {
                 return new Inspector(document.querySelector("#trend-dropdown"));
             }
-            
+
             else return new Inspector(document.querySelector("#garbage"));
         });
 
@@ -134,7 +142,7 @@
             <div id="trend-dropdown"></div>
             <div id="trend-chart"></div>
         </div>
-        
+
     </main>
 
 
