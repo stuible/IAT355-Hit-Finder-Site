@@ -19,7 +19,7 @@
         #hit-finder {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
+            /* grid-template-rows: 1fr 1fr; */
             grid-template-areas: "titles genres""map trend";
 
             text-align: center;
@@ -42,6 +42,11 @@
 
         #trend-container {
             grid-area: trend;
+            padding-top: 1.5em;
+        }
+
+        #trend-dropdown {
+            margin-bottom: 0.5em;
         }
 
         h1 {
